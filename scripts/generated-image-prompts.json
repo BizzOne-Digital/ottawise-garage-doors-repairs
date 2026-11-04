@@ -1,0 +1,89 @@
+{
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "name": "home-hero",
+      "prompt": "Use case: photorealistic-natural. Asset: garage door company home page hero. Create a premium natural architectural photograph of a welcoming two-storey Ottawa suburban home, beige stone and warm white siding, a beautiful closed charcoal insulated double garage door with slim upper windows as the dominant central subject. Neat driveway, subtle maple landscaping, soft warm late afternoon daylight. Landscape 1536x1024 composition, whole garage door visible with breathing room for responsive crops. Authentic Canadian residential architecture, physically plausible geometry, quiet navy and warm neutral palette. No text, no logos, no watermarks, no collage. Save the finished image.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-fa8daf76-cd83-450c-948f-0068fa4ebec9.png",
+      "output": "/images/home-hero.webp"
+    },
+    {
+      "name": "new-door-installation",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, new-door-installation. A newly installed closed matte charcoal sectional double garage door with a slim row of top windows, clean red brick Ottawa bungalow facade, new perimeter weather seals, neat driveway. Exterior architectural photograph, garage door fully visible and dominant. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-ea01c4d8-8fc8-4821-bf32-629ca96454de.png",
+      "output": "/images/new-door-installation.webp"
+    },
+    {
+      "name": "garage-door-repair",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, garage-door-repair. Inside a tidy residential garage, a professional technician in plain navy workwear and protective gloves inspecting a hinge on a closed white sectional garage door. Three quarter view, technician and door hardware sharp, natural daylight. No hazardous work, no branding. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-9f516de2-91a8-4f73-bbe6-7d21ca3a8f08.png",
+      "output": "/images/garage-door-repair.webp"
+    },
+    {
+      "name": "spring-replacement",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, spring-replacement. Detailed close photograph of a professionally installed black torsion spring assembly on the steel shaft directly above a closed residential garage door, winding cone and central mounting bracket visible, realistic steel hardware and coiled spring texture, clean workshop lighting. No hands, no loose tools. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-26049adc-7936-465c-ab4a-4243c8f7f5e0.png",
+      "output": "/images/spring-replacement.webp"
+    },
+    {
+      "name": "cables-rollers-hardware",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, cables-rollers-hardware. Detailed photograph of the side of a white sectional garage door: clean galvanized steel hinge, black nylon roller seated correctly within a vertical metal track, taut steel lift cable nearby. Accurate residential hardware geometry, shallow depth of field, main roller and hinge centered. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-aadcf856-e1e9-497d-9779-68ed8af0443f.png",
+      "output": "/images/cables-rollers-hardware.webp"
+    },
+    {
+      "name": "opener-installation",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, opener-installation. Wide interior photograph of a clean residential garage with a modern unbranded ceiling-mounted belt-drive garage door opener, integrated light, straight steel rail toward the header above a closed white sectional door. Opener centered and clearly visible, realistic mounting brackets and rail. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-9d20e5a4-88ee-42f8-96de-fc2842a43038.png",
+      "output": "/images/opener-installation.webp"
+    },
+    {
+      "name": "opener-troubleshooting",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, opener-troubleshooting. Close photograph of a residential garage door photoelectric safety sensor mounted near floor level beside a galvanized vertical track, a small green indicator light, tidy wiring, closed white garage door behind. Realistic diagnostic subject, crisp sensor and bracket, softly blurred garage interior. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-f6093406-6b58-43a9-aa41-2b7cdf134373.png",
+      "output": "/images/opener-troubleshooting.webp"
+    },
+    {
+      "name": "weather-seal",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, weather-seal. Close low-angle photograph of a new continuous black rubber bottom weather seal seated snugly between a white sectional garage door and clean concrete garage floor, side weather strip visible at edge. Dry autumn maple leaf outside, soft daylight, crisp rubber profile and snug seal. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-30ef2a08-3c9e-4a67-b84f-4f380259d8a4.png",
+      "output": "/images/weather-seal.webp"
+    },
+    {
+      "name": "track-alignment",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, track-alignment. Detailed interior photograph looking along a correctly aligned galvanized vertical garage door track curving into a horizontal ceiling track, black rollers seated inside track, white sectional garage door at side. Clear realistic geometry and brackets, natural garage lighting. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-5a6c1893-7dfe-41c1-b771-c557c15e1224.png",
+      "output": "/images/track-alignment.webp"
+    },
+    {
+      "name": "maintenance",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, maintenance. Professional garage door technician in plain navy work shirt and gloves carefully applying lubricant with a narrow spray straw to a metal hinge on a closed white sectional garage door, tidy garage, focused cropped work scene, no face needed. Precise anatomy and realistic hardware. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-c051bb07-0581-49b3-9331-f20497287669.png",
+      "output": "/images/maintenance.webp"
+    },
+    {
+      "name": "home-workmanship",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, home-workmanship. Wide candid photograph of a garage door service technician in plain navy workwear inspecting a neatly organized tool bag and replacement garage door rollers on a workbench in a tidy residential garage. Closed white sectional door visible behind, warm natural daylight, professional and approachable. Main subject centered, no legible text or logos. Landscape 1536x1024 composition. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-715078a5-c0b3-4601-be6a-2421da0e1761.png",
+      "output": "/images/home-workmanship.webp"
+    },
+    {
+      "name": "services-hero",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, services-hero. Architectural photograph of a modern Ottawa home with a broad ivory insulated sectional garage door with understated upper glass windows, pale stone and warm wood facade, clean driveway and understated shrubs, soft morning light. Complete garage door centrally framed, elegant warm neutral materials. Landscape 1536x1024. Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-e8b654c5-9369-4889-8bd5-d1c4550b8c8e.png",
+      "output": "/images/services-hero.webp"
+    },
+    {
+      "name": "about-home",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, about-home. Portrait architectural photograph of a welcoming Ottawa brick home with a beautiful closed warm grey single garage door, narrow windows across the top, mature maple tree and tasteful planting beside the driveway. Vertical 1024x1536 composition, complete single garage door prominently centered.  Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-fb97940e-e513-424d-859a-197894826ded.png",
+      "output": "/images/about-home.webp"
+    },
+    {
+      "name": "about-tools",
+      "prompt": "Use case: photorealistic-natural. Asset: Ottawa residential garage door company website, about-tools. Portrait still life photograph of a tidy garage door service workbench: organized black nylon garage door rollers, galvanized hinges, steel lift cable coil and cordless drill on warm wood, blurred white sectional garage door behind. Vertical 1024x1536 composition, believable professional tools, navy and warm neutral palette.  Premium natural commercial photography, warm neutrals with charcoal and navy, realistic materials and physical geometry, main subject centered with crop-safe margins. No text, logos, watermarks, collage, or inset images.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1a89b-fb70-7a22-83dc-493d3f79da80\\exec-4044ef12-9ef8-419b-8849-9ae9d5d6a22d.png",
+      "output": "/images/about-tools.webp"
+    }
+  ]
+}
