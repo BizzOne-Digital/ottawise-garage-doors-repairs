@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { STATUSES, TIME_WINDOWS } from "./constants";
+import { DOOR_SIZES, isValidConfig, type DoorConfig } from "./doorCatalog";
 
 const phoneRe = /^[+()\-.\s\d]{7,25}$/;
 const clean = (max: number) => z.string().trim().max(max);
@@ -37,6 +38,20 @@ export const bookingSchema = z.object({
   message: clean(3000).optional().default(""),
 });
 export type BookingInput = z.infer<typeof bookingSchema>;
+
+export const doorQuoteSchema = z.object({
+  name: clean(100).min(2, "Please enter your name"),
+  email: clean(200).email("Please enter a valid email address"),
+  phone: clean(25).regex(phoneRe, "Please enter a valid phone number"),
+  area: clean(100).min(1, "Please choose your area"),
+  doorSize: z.enum(DOOR_SIZES, { message: "Please choose a door size" }),
+  message: clean(3000).optional().default(""),
+  config: z.object({
+    style: z.string().max(40), colour: z.string().max(40), pattern: z.string().max(40),
+    glass: z.string().max(40), decor: z.string().max(40),
+  }).refine((c) => isValidConfig(c as DoorConfig), "Please choose valid door options"),
+});
+export type DoorQuoteInput = z.infer<typeof doorQuoteSchema>;
 
 export const statusSchema = z.enum(STATUSES);
 

@@ -152,6 +152,30 @@ BookingRequestSchema.index({ createdAt: -1 });
 BookingRequestSchema.index({ preferredDate: 1 });
 export const BookingRequest = getModel("BookingRequest", BookingRequestSchema);
 
+const DoorQuoteSchema = new Schema(
+  {
+    ...requestFields,
+    service: { type: String, maxlength: 120 },
+    doorSize: { type: String, maxlength: 80 },
+    config: {
+      style: { type: String, required: true, maxlength: 40 },
+      colour: { type: String, required: true, maxlength: 40 },
+      pattern: { type: String, required: true, maxlength: 40 },
+      glass: { type: String, required: true, maxlength: 40 },
+      decor: { type: String, required: true, maxlength: 40 },
+    },
+    // Human-readable snapshot, so records stay meaningful if the catalogue changes later.
+    summary: {
+      style: String, colour: String, windows: String, glass: String,
+    },
+    emailStatus: { type: String, enum: ["sent", "failed", "not-configured"], default: "not-configured" },
+  },
+  { timestamps: true }
+);
+DoorQuoteSchema.index({ status: 1, createdAt: -1 });
+DoorQuoteSchema.index({ createdAt: -1 });
+export const DoorQuote = getModel("DoorQuote", DoorQuoteSchema);
+
 /* ---------- Uploads (binary documents kept separate from content) ---------- */
 const StoredUploadSchema = new Schema(
   {

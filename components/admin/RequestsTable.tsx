@@ -11,7 +11,7 @@ const PAGE_SIZE = 20;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /** Server-rendered list with search, status filter, and pagination (shared by enquiries and bookings). */
 export default async function RequestsTable({ model, kind, basePath, title, sp }: {
-  model: Model<any>; kind: "enquiries" | "bookings"; basePath: string; title: string;
+  model: Model<any>; kind: "enquiries" | "bookings" | "quotes"; basePath: string; title: string;
   sp: { q?: string; status?: string; page?: string };
 }) {
   const q = (sp.q || "").trim().slice(0, 100);
@@ -39,6 +39,7 @@ export default async function RequestsTable({ model, kind, basePath, title, sp }
       id: String(d._id), name: d.name, email: d.email, phone: d.phone, service: d.service || "", area: d.area || "",
       message: d.message || "", status: d.status, adminNotes: d.adminNotes || "", createdAt: new Date(d.createdAt).toISOString(),
       preferredDate: d.preferredDate, timeWindow: d.timeWindow,
+      doorSize: d.doorSize, emailStatus: d.emailStatus, summary: d.summary, config: d.config ? { style: d.config.style, colour: d.config.colour, pattern: d.config.pattern, glass: d.config.glass, decor: d.config.decor } : undefined,
     }));
   } catch (e) {
     console.error(`[admin:${kind}]`, (e as Error).message);

@@ -99,3 +99,13 @@ The 14 illustrative website photos were created using the built-in image generat
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run seed` | Idempotent content seed |
 | `npm run create-admin` | Admin bootstrap or password reset |
+
+## 9. Door configurator (`/design-your-door`)
+
+Customers choose a **door style** (Classic 300, Coach House 400, Heritage 500, Carriage 600, Modern Flush 800, Modern Grooved 800), a **colour** (8 options), a **window pattern** (9 patterns or none), an optional **decorative top-row design** (10 designs), and **glass** (clear, frosted, tinted). A live SVG preview updates with every choice. They then submit their details for a free quote.
+
+- **Catalogue:** `lib/doorCatalog.ts` is the single source of truth for options, validation, admin display, and email content. Edit it to add or rename options.
+- **Preview:** `components/door/DoorPreview.tsx` draws the door as SVG. Illustrations are indicative, and the page says so.
+- **Saving:** `POST /api/door-quote` validates every option against the catalogue on the server, saves a `DoorQuote` record (with a readable snapshot of the choices), then sends the email. The request is saved even if the email fails.
+- **Admin:** **Door quotes** shows each request with a door preview, the selections, the email delivery status, notes, statuses, search, and filters.
+- **Email:** set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `NOTIFY_EMAIL`, and `MAIL_FROM` (see `.env.example`). For Gmail, use an App Password: turn on 2-Step Verification, then go to Google Account → Security → App passwords. If SMTP is not set, the admin shows "Email notification: not configured". User input is HTML-escaped in emails, and line breaks are stripped from headers.

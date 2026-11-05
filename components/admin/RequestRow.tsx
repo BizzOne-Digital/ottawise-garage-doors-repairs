@@ -4,19 +4,22 @@ import { useRouter } from "next/navigation";
 import { CalendarDays, ChevronDown, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import { STATUSES } from "@/lib/constants";
+import type { DoorConfig } from "@/lib/doorCatalog";
+import DoorPreview from "@/components/door/DoorPreview";
 import { useAdmin } from "./AdminProvider";
 import { STATUS_STYLES } from "./ui";
 
 export type ReqItem = {
   id: string; name: string; email: string; phone: string; service: string; area: string; message: string;
   status: string; adminNotes: string; createdAt: string; preferredDate?: string; timeWindow?: string;
+  doorSize?: string; emailStatus?: string; summary?: { style: string; colour: string; windows: string; glass: string }; config?: DoorConfig;
 };
 
 const fmtDateTime = (iso: string) => new Intl.DateTimeFormat("en-CA", { timeZone: "America/Toronto", dateStyle: "medium", timeStyle: "short" }).format(new Date(iso));
 /** preferredDate is a calendar date in Ottawa; format it without shifting timezones. */
 const fmtDay = (ymd: string) => new Intl.DateTimeFormat("en-CA", { timeZone: "UTC", weekday: "short", month: "short", day: "numeric", year: "numeric" }).format(new Date(`${ymd}T12:00:00Z`));
 
-export default function RequestRow({ item, kind }: { item: ReqItem; kind: "enquiries" | "bookings" }) {
+export default function RequestRow({ item, kind }: { item: ReqItem; kind: "enquiries" | "bookings" | "quotes" }) {
   const { api, toast, confirm } = useAdmin();
   const router = useRouter();
   const [open, setOpen] = useState(item.status === "New");
@@ -73,6 +76,23 @@ export default function RequestRow({ item, kind }: { item: ReqItem; kind: "enqui
             {item.area && <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-gold" aria-hidden />{item.area}</p>}
             {item.preferredDate && (
               <p className="flex items-center gap-2"><CalendarDays className="h-4 w-4 text-gold" aria-hidden />{fmtDay(item.preferredDate)} &middot; {item.timeWindow} <span className="text-xs">(Ottawa time, requested, not confirmed)</span></p>
+            )}
+            {item.config && item.summary && (
+              <div className="flex gap-3 rounded-md border border-line p-3">
+                <div className="w-32 shrink-0 rounded bg-navy-deep p-1.5"><DoorPreview config={item.config} idPrefix={`q-${item.id}`} className="h-auto w-full" /></div>
+                <dl className="grid flex-1 grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-xs">
+                  <dt className="font-semibold">Style</dt><dd className="text-navy">{item.summary.style}</dd>
+                  <dt className="font-semibold">Colour</dt><dd className="text-navy">{item.summary.colour}</dd>
+                  <dt className="font-semibold">Windows</dt><dd className="text-navy">{item.summary.windows}</dd>
+                  <dt className="font-semibold">Glass</dt><dd className="text-navy">{item.summary.glass}</dd>
+                  {item.doorSize && <><dt className="font-semibold">Size</dt><dd className="text-navy">{item.doorSize}</dd></>}
+                </dl>
+              </div>
+            )}
+            {item.emailStatus && (
+              <p className={`text-xs font-semibold ${item.emailStatus === "sent" ? "text-green-800" : item.emailStatus === "failed" ? "text-red-700" : "text-body"}`}>
+                Email notification: {item.emailStatus === "sent" ? "sent" : item.emailStatus === "failed" ? "failed to send (check SMTP settings)" : "not configured"}
+              </p>
             )}
             {item.message && <p className="whitespace-pre-wrap rounded-md bg-sand p-3 text-navy">{item.message}</p>}
           </div>

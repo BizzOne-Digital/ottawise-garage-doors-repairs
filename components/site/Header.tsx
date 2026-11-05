@@ -42,7 +42,7 @@ export default function Header({ s }: { s: SiteSettingsT }) {
           </Link>
 
           <nav aria-label="Main" className="hidden lg:block">
-            <ul className="flex items-center gap-8">
+            <ul className="flex items-center gap-5 xl:gap-8">
               {s.nav.map((l) => (
                 <li key={l.href}>
                   <Link

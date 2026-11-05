@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { CalendarCheck, Image as ImageIcon, Inbox, MessageSquareQuote, Wrench } from "lucide-react";
+import { CalendarCheck, DoorOpen, Image as ImageIcon, Inbox, MessageSquareQuote, Wrench } from "lucide-react";
 import { connectDB } from "@/lib/db";
-import { BookingRequest, ContactEnquiry, Service, StoredUpload, Testimonial } from "@/lib/models";
+import { BookingRequest, ContactEnquiry, DoorQuote, Service, StoredUpload, Testimonial } from "@/lib/models";
 
 export const dynamic = "force-dynamic";
 
@@ -9,12 +9,13 @@ type Recent = { _id: unknown; name: string; service?: string; createdAt: Date; s
 
 export default async function Dashboard() {
   let data: {
-    counts: { newEnq: number; enq: number; newBook: number; book: number; services: number; published: number; testimonials: number; publishedT: number; media: number };
+    counts: { newQ: number; q: number; newEnq: number; enq: number; newBook: number; book: number; services: number; published: number; testimonials: number; publishedT: number; media: number };
     recentEnq: Recent[]; recentBook: Recent[];
   } | null = null;
   try {
     await connectDB();
-    const [newEnq, enq, newBook, book, services, published, testimonials, publishedT, media, recentEnq, recentBook] = await Promise.all([
+    const [newQ, q, newEnq, enq, newBook, book, services, published, testimonials, publishedT, media, recentEnq, recentBook] = await Promise.all([
+      DoorQuote.countDocuments({ status: "New" }), DoorQuote.countDocuments(),
       ContactEnquiry.countDocuments({ status: "New" }), ContactEnquiry.countDocuments(),
       BookingRequest.countDocuments({ status: "New" }), BookingRequest.countDocuments(),
       Service.countDocuments(), Service.countDocuments({ published: true }),
@@ -23,7 +24,7 @@ export default async function Dashboard() {
       ContactEnquiry.find({}, { name: 1, service: 1, createdAt: 1, status: 1 }).sort({ createdAt: -1 }).limit(5).lean<Recent[]>(),
       BookingRequest.find({}, { name: 1, service: 1, createdAt: 1, status: 1 }).sort({ createdAt: -1 }).limit(5).lean<Recent[]>(),
     ]);
-    data = { counts: { newEnq, enq, newBook, book, services, published, testimonials, publishedT, media }, recentEnq, recentBook };
+    data = { counts: { newQ, q, newEnq, enq, newBook, book, services, published, testimonials, publishedT, media }, recentEnq, recentBook };
   } catch (e) {
     console.error("[admin:dashboard]", (e as Error).message);
   }
@@ -31,6 +32,7 @@ export default async function Dashboard() {
   if (!data) return <p role="alert" className="card p-6 text-red-800">Could not load dashboard data. Check the database connection.</p>;
   const c = data.counts;
   const tiles = [
+    { href: "/admin/quotes?status=New", label: "New door quotes", value: c.newQ, sub: `${c.q} total`, Icon: DoorOpen, alert: c.newQ > 0 },
     { href: "/admin/enquiries?status=New", label: "New enquiries", value: c.newEnq, sub: `${c.enq} total`, Icon: Inbox, alert: c.newEnq > 0 },
     { href: "/admin/bookings?status=New", label: "New booking requests", value: c.newBook, sub: `${c.book} total`, Icon: CalendarCheck, alert: c.newBook > 0 },
     { href: "/admin/services", label: "Published services", value: c.published, sub: `${c.services} total`, Icon: Wrench },
@@ -43,7 +45,7 @@ export default async function Dashboard() {
     <>
       <h1 className="text-2xl sm:text-[1.75rem]">Dashboard</h1>
       <p className="mt-1 text-sm">Live counts from the database. Times shown in Ottawa time.</p>
-      <ul className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <ul className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
         {tiles.map(({ href, label, value, sub, Icon, alert }) => (
           <li key={label}>
             <Link href={href} className={`card block p-5 transition-colors hover:border-gold ${alert ? "border-gold" : ""}`}>

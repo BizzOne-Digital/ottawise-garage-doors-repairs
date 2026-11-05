@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CalendarCheck, ExternalLink, FileText, Image as ImageIcon, Inbox, LayoutDashboard, LogOut, Menu, MessageSquareQuote, Settings, Wrench, X } from "lucide-react";
+import { CalendarCheck, DoorOpen, ExternalLink, FileText, Image as ImageIcon, Inbox, LayoutDashboard, LogOut, Menu, MessageSquareQuote, Settings, Wrench, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAdmin } from "./AdminProvider";
 
@@ -10,6 +10,7 @@ const NAV = [
   { href: "/admin", label: "Dashboard", Icon: LayoutDashboard },
   { href: "/admin/enquiries", label: "Contact enquiries", Icon: Inbox },
   { href: "/admin/bookings", label: "Booking requests", Icon: CalendarCheck },
+  { href: "/admin/quotes", label: "Door quotes", Icon: DoorOpen },
   { href: "/admin/services", label: "Services", Icon: Wrench },
   { href: "/admin/pages", label: "Page content", Icon: FileText },
   { href: "/admin/testimonials", label: "Testimonials", Icon: MessageSquareQuote },

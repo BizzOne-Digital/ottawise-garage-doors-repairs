@@ -197,7 +197,7 @@ export default async function HomePage() {
               ))}
             </ul>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href={`/booking?service=${encodeURIComponent("New Garage Door Supply & Installation")}`} className="btn-gold px-7">{s(d, "upgradeButtonLabel")}</Link>
+              <Link href="/design-your-door" className="btn-gold px-7">{s(d, "upgradeButtonLabel")}</Link>
               <Link href="/services/new-garage-door-installation" className="btn border-[1.5px] border-white/40 px-7 text-white hover:bg-white hover:text-navy">Learn more</Link>
             </div>
           </div>
