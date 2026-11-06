@@ -14,6 +14,9 @@ export type SiteSettingsT = {
   phoneLink: string;
   email: string;
   websiteUrl: string;
+  instagramUrl: string;
+  facebookUrl: string;
+  whatsappUrl: string;
   hoursShort: string;
   hoursLong: string;
   utilityLeft: string;
@@ -71,6 +74,9 @@ export const DEFAULT_SETTINGS: SiteSettingsT = {
   phoneLink: "tel:+13432092317",
   email: "ottawisegaragedoors@gmail.com",
   websiteUrl: "https://ottawisegaragedoors.ca",
+  instagramUrl: "https://www.instagram.com/ottawise_garagedoors/",
+  facebookUrl: "https://www.facebook.com/share/1FF6E6dKyC/",
+  whatsappUrl: "https://wa.me/message/XMIOPHP3IJ6TN1",
   hoursShort: "Open 7 days • 7:00 AM – 11:00 PM",
   hoursLong: "Monday – Sunday, 7:00 AM – 11:00 PM",
   utilityLeft: "Serving Ottawa & surrounding areas",

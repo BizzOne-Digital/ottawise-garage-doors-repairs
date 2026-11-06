@@ -32,6 +32,9 @@ export default function SettingsForm({ initial }: { initial: SiteSettingsT }) {
             {tf("phoneDisplay", "Phone (display)")}
             {tf("phoneLink", "Phone link", "Format: tel:+13432092317")}
             {tf("websiteUrl", "Website URL")}
+            {tf("instagramUrl", "Instagram link")}
+            {tf("facebookUrl", "Facebook link")}
+            {tf("whatsappUrl", "WhatsApp link")}
             {tf("hoursLong", "Business hours (full)")}
             {tf("utilityLeft", "Top bar left text")}
             {tf("utilityRight", "Top bar right text")}

@@ -15,6 +15,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     url: SITE_URL,
     telephone: s.phoneLink.replace("tel:", ""),
     email: s.email,
+    sameAs: [s.instagramUrl, s.facebookUrl].filter(Boolean),
     logo: `${SITE_URL}${s.logoUrl.startsWith("/") ? s.logoUrl : "/brand/logo.png"}`,
     areaServed: s.serviceAreas.map((a) => ({ "@type": "City", name: a })),
     openingHoursSpecification: [{

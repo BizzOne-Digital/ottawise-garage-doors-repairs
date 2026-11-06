@@ -72,6 +72,8 @@ export const imageValue = z.string().trim().max(500).refine(
   "Invalid image URL"
 );
 
+const optionalHttpsUrl = clean(300).refine((v) => v === "" || /^https:\/\/\S+$/.test(v), "Use a full https:// link, or leave this empty");
+
 export const settingsSchema = z.object({
   businessName: clean(120).min(1),
   contactPerson: clean(120),
@@ -81,6 +83,9 @@ export const settingsSchema = z.object({
   phoneLink: clean(40).regex(/^tel:\+?\d{7,15}$/, "Use the format tel:+13432092317"),
   email: clean(200).email(),
   websiteUrl: clean(300).url(),
+  instagramUrl: optionalHttpsUrl,
+  facebookUrl: optionalHttpsUrl,
+  whatsappUrl: optionalHttpsUrl,
   hoursShort: clean(120),
   hoursLong: clean(200),
   utilityLeft: clean(120),
