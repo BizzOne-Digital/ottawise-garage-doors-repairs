@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { STATUSES, TIME_WINDOWS } from "./constants";
-import { DOOR_SIZES, isValidConfig, type DoorConfig } from "./doorCatalog";
+import { isValidConfig, type DoorConfig } from "./doorCatalog";
 
 const phoneRe = /^[+()\-.\s\d]{7,25}$/;
 const clean = (max: number) => z.string().trim().max(max);
@@ -44,11 +44,12 @@ export const doorQuoteSchema = z.object({
   email: clean(200).email("Please enter a valid email address"),
   phone: clean(25).regex(phoneRe, "Please enter a valid phone number"),
   area: clean(100).min(1, "Please choose your area"),
-  doorSize: z.enum(DOOR_SIZES, { message: "Please choose a door size" }),
   message: clean(3000).optional().default(""),
   config: z.object({
-    style: z.string().max(40), colour: z.string().max(40), pattern: z.string().max(40),
-    glass: z.string().max(40), decor: z.string().max(40),
+    style: z.string().max(40), colour: z.string().max(40),
+    width: z.number().int(), height: z.number().int(), quantity: z.number().int(),
+    windowType: z.string().max(40), windows: z.array(z.string().max(5)).max(64),
+    glass: z.string().max(40), frame: z.string().max(40),
   }).refine((c) => isValidConfig(c as DoorConfig), "Please choose valid door options"),
 });
 export type DoorQuoteInput = z.infer<typeof doorQuoteSchema>;

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { toConfig } from "@/lib/doorCatalog";
 import type { Model } from "mongoose";
 import { Search } from "lucide-react";
 import { escapeRegex } from "@/lib/adminData";
@@ -39,7 +40,7 @@ export default async function RequestsTable({ model, kind, basePath, title, sp }
       id: String(d._id), name: d.name, email: d.email, phone: d.phone, service: d.service || "", area: d.area || "",
       message: d.message || "", status: d.status, adminNotes: d.adminNotes || "", createdAt: new Date(d.createdAt).toISOString(),
       preferredDate: d.preferredDate, timeWindow: d.timeWindow,
-      doorSize: d.doorSize, emailStatus: d.emailStatus, summary: d.summary, config: d.config ? { style: d.config.style, colour: d.config.colour, pattern: d.config.pattern, glass: d.config.glass, decor: d.config.decor } : undefined,
+      doorSize: d.doorSize, emailStatus: d.emailStatus, summary: d.summary, config: d.config ? toConfig(d.config) : undefined,
     }));
   } catch (e) {
     console.error(`[admin:${kind}]`, (e as Error).message);

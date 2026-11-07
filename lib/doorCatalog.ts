@@ -6,14 +6,21 @@
 
 export type DoorStyleId = "classic-300" | "coach-house-400" | "heritage-500" | "carriage-600" | "modern-flush-800" | "modern-grooved-800";
 
-export const DOOR_STYLES: { id: DoorStyleId; name: string; tagline: string; description: string }[] = [
-  { id: "classic-300", name: "Classic 300", tagline: "Familiar detail. Timeless appeal.", description: "A balanced arrangement of short raised panels gives this door a classic, structured look." },
-  { id: "coach-house-400", name: "Coach House 400", tagline: "Traditional character, beautifully framed.", description: "Short carriage-style panels with vertical detailing bring a welcoming, country-inspired character." },
-  { id: "heritage-500", name: "Heritage 500", tagline: "A classic look with a broader profile.", description: "Long raised panels create a clean rhythm across the door with a more expansive appearance." },
-  { id: "carriage-600", name: "Carriage 600", tagline: "Carriage-house charm, in every panel.", description: "Elongated carriage-style panels combine broad proportions with subtle vertical detailing." },
-  { id: "modern-flush-800", name: "Modern Flush 800", tagline: "Clean surfaces. Confident design.", description: "A smooth, understated panel profile that lets the architecture lead." },
-  { id: "modern-grooved-800", name: "Modern Grooved 800", tagline: "Horizontal lines. Architectural presence.", description: "Fine horizontal grooves add texture and depth to a modern profile." },
+/** panel: "short" = 4 panels per section on a single door, "long" = 2, "modern" = no raised panels. */
+export const DOOR_STYLES: { id: DoorStyleId; name: string; tagline: string; description: string; panel: "short" | "long" | "modern" }[] = [
+  { id: "classic-300", name: "Classic 300", tagline: "Familiar detail. Timeless appeal.", description: "A balanced arrangement of short raised panels gives this door a classic, structured look.", panel: "short" },
+  { id: "coach-house-400", name: "Coach House 400", tagline: "Traditional character, beautifully framed.", description: "Short carriage-style panels with vertical detailing bring a welcoming, country-inspired character.", panel: "short" },
+  { id: "heritage-500", name: "Heritage 500", tagline: "A classic look with a broader profile.", description: "Long raised panels create a clean rhythm across the door with a more expansive appearance.", panel: "long" },
+  { id: "carriage-600", name: "Carriage 600", tagline: "Carriage-house charm, in every panel.", description: "Elongated carriage-style panels combine broad proportions with subtle vertical detailing.", panel: "long" },
+  { id: "modern-flush-800", name: "Modern Flush 800", tagline: "Clean surfaces. Confident design.", description: "A smooth, understated panel profile that lets the architecture lead.", panel: "modern" },
+  { id: "modern-grooved-800", name: "Modern Grooved 800", tagline: "Horizontal lines. Architectural presence.", description: "Fine horizontal grooves add texture and depth to a modern profile.", panel: "modern" },
 ];
+
+/** Sizes in feet. 8x7 and 16x7 are the most common in Ottawa homes. */
+export const DOOR_WIDTHS = [8, 9, 10, 12, 14, 15, 16, 18] as const;
+export const DOOR_HEIGHTS = [7, 8, 9] as const;
+export const MAX_QUANTITY = 4;
+export const sizeLabel = (w: number, h: number) => `${w} ft wide x ${h} ft high`;
 
 export const DOOR_COLOURS = [
   { id: "white", name: "White", hex: "#F3F3F1", line: "#C9C9C4" },
@@ -27,6 +34,18 @@ export const DOOR_COLOURS = [
 ] as const;
 export type DoorColourId = (typeof DOOR_COLOURS)[number]["id"];
 
+/** Window frame colours. "match" uses the door colour. */
+export const FRAME_COLOURS = [
+  { id: "match", name: "Match door colour", hex: "" },
+  { id: "white", name: "White", hex: "#F3F3F1" },
+  { id: "almond", name: "Almond", hex: "#ECE4D3" },
+  { id: "sandstone", name: "Sandstone", hex: "#D4CDC0" },
+  { id: "charcoal", name: "Charcoal", hex: "#7C7F84" },
+  { id: "dark-brown", name: "Dark Brown", hex: "#4D4237" },
+  { id: "brown", name: "Brown", hex: "#5E3B2E" },
+  { id: "black", name: "Black", hex: "#26272A" },
+] as const;
+
 export const GLASS_TYPES = [
   { id: "clear", name: "Clear", description: "Transparent view; natural light." },
   { id: "frosted", name: "Frosted", description: "Diffused light; obscured view." },
@@ -34,69 +53,99 @@ export const GLASS_TYPES = [
 ] as const;
 export type GlassId = (typeof GLASS_TYPES)[number]["id"];
 
-/** A window rectangle in door-relative units: row 0-3 (top to bottom), x and w as fractions of door width. */
-export type Win = { row: number; x: number; w: number };
-const four = (row: number): Win[] => [0, 1, 2, 3].map((i) => ({ row, x: 0.045 + i * 0.235, w: 0.205 }));
-
-export const WINDOW_PATTERNS: { id: string; code: string; name: string; windows: Win[] }[] = [
-  { id: "none", code: "", name: "No windows", windows: [] },
-  { id: "top-row", code: "01", name: "Top row", windows: four(0) },
-  { id: "centre-stack", code: "02", name: "Centre stack", windows: [0, 1, 2, 3].map((row) => ({ row, x: 0.39, w: 0.22 })) },
-  { id: "alternating-lengths", code: "03", name: "Alternating lengths", windows: [0, 1, 2, 3].map((row) => ({ row, x: 0.06, w: row % 2 ? 0.34 : 0.6 })) },
-  { id: "diagonal", code: "04", name: "Diagonal", windows: [0, 1, 2, 3].map((row) => ({ row, x: 0.045 + row * 0.235, w: 0.205 })) },
-  { id: "left-stack", code: "05", name: "Left stack", windows: [0, 1, 2, 3].map((row) => ({ row, x: 0.05, w: 0.38 })) },
-  { id: "stepped-lengths", code: "06", name: "Stepped lengths", windows: [{ row: 0, x: 0.05, w: 0.82 }, { row: 1, x: 0.05, w: 0.62 }, { row: 2, x: 0.05, w: 0.42 }] },
-  { id: "offset-stack", code: "07", name: "Offset stack", windows: [0, 1, 2, 3].map((row) => ({ row, x: 0.05, w: 0.22 })) },
-  { id: "right-stack", code: "08", name: "Right stack", windows: [0, 1, 2, 3].map((row) => ({ row, x: 0.73, w: 0.22 })) },
-  { id: "mixed", code: "09", name: "Mixed arrangement", windows: [...four(0), { row: 1, x: 0.05, w: 0.43 }, { row: 1, x: 0.52, w: 0.43 }, { row: 2, x: 0.2, w: 0.6 }] },
+export type InsertKind = "plain" | "grid" | "arched-grid" | "diamond" | "bars" | "arched-bars" | "wheel" | "trellis" | "victorian";
+/** Window inserts the customer places on the door. `fits` lists the panel types each insert is made for. */
+export const WINDOW_TYPES: { id: string; code: string; name: string; kind: InsertKind; fits: ("short" | "long" | "modern")[] }[] = [
+  { id: "plain", code: "", name: "Plain window", kind: "plain", fits: ["short", "long", "modern"] },
+  { id: "stockton", code: "L01 / S01", name: "Stockton", kind: "grid", fits: ["short", "long"] },
+  { id: "arched-stockton", code: "L02", name: "Arched Stockton", kind: "arched-grid", fits: ["long"] },
+  { id: "waterton", code: "L04 / S04", name: "Waterton", kind: "diamond", fits: ["short", "long"] },
+  { id: "stockbridge", code: "L05", name: "Straight Stockbridge", kind: "bars", fits: ["long"] },
+  { id: "arched-stockbridge", code: "L06", name: "Arched Stockbridge", kind: "arched-bars", fits: ["long"] },
+  { id: "wagon-wheel", code: "S06", name: "Wagon Wheel", kind: "wheel", fits: ["short"] },
+  { id: "long-trellis", code: "L08", name: "Long Trellis", kind: "trellis", fits: ["long"] },
+  { id: "victorian", code: "L09", name: "Victorian", kind: "victorian", fits: ["long"] },
 ];
 
-export type DecorKind = "grid" | "arched-grid" | "diamond" | "bars" | "arched-bars" | "wheel" | "trellis" | "victorian";
-/** Decorative inserts fill the top row: "L" designs use 2 long windows, "S" designs use 4 short windows. */
-export const DECORATIVE_DESIGNS: { id: string; code: string; name: string; size: "L" | "S" | ""; kind: DecorKind | "" }[] = [
-  { id: "none", code: "", name: "No decorative design", size: "", kind: "" },
-  { id: "l01-stockton", code: "L01", name: "Stockton", size: "L", kind: "grid" },
-  { id: "l02-arched-stockton", code: "L02", name: "Arched Stockton", size: "L", kind: "arched-grid" },
-  { id: "l04-waterton", code: "L04", name: "Waterton", size: "L", kind: "diamond" },
-  { id: "l05-straight-stockbridge", code: "L05", name: "Straight Stockbridge", size: "L", kind: "bars" },
-  { id: "l06-arched-stockbridge", code: "L06", name: "Arched Stockbridge", size: "L", kind: "arched-bars" },
-  { id: "s01-stockton", code: "S01", name: "Stockton", size: "S", kind: "grid" },
-  { id: "s04-waterton", code: "S04", name: "Waterton", size: "S", kind: "diamond" },
-  { id: "s06-wagon-wheel", code: "S06", name: "Wagon Wheel", size: "S", kind: "wheel" },
-  { id: "l08-long-trellis", code: "L08", name: "Long Trellis", size: "L", kind: "trellis" },
-  { id: "l09-victorian", code: "L09", name: "Victorian", size: "L", kind: "victorian" },
-];
+export type DoorConfig = {
+  style: DoorStyleId;
+  colour: DoorColourId;
+  width: number;
+  height: number;
+  quantity: number;
+  windowType: string;
+  /** Window positions as "row-col" keys (row 0 = top section). Empty = solid door, panels only. */
+  windows: string[];
+  glass: GlassId;
+  frame: string;
+};
 
-export const DOOR_SIZES = ["Single car (approx. 8-9 ft wide)", "Double car (approx. 16 ft wide)", "Not sure / need measuring"] as const;
+/** Starts as a solid door with panels only; windows are added by the customer. */
+export const DEFAULT_CONFIG: DoorConfig = {
+  style: "classic-300", colour: "white", width: 8, height: 7, quantity: 1, windowType: "plain", windows: [], glass: "clear", frame: "match",
+};
 
-export type DoorConfig = { style: DoorStyleId; colour: DoorColourId; pattern: string; glass: GlassId; decor: string };
-export const DEFAULT_CONFIG: DoorConfig = { style: "modern-flush-800", colour: "charcoal", pattern: "left-stack", glass: "clear", decor: "none" };
+export const ROWS = 4;
+export const styleOf = (id: string) => DOOR_STYLES.find((s) => s.id === id) ?? DOOR_STYLES[0];
+/** Window slots per section: panel count across the door; doors 14 ft and wider have twice as many. */
+export function columnsFor(style: string, width: number) {
+  const base = styleOf(style).panel === "long" ? 2 : 4;
+  return width >= 14 ? base * 2 : base;
+}
+export const windowTypesFor = (style: string) => WINDOW_TYPES.filter((t) => t.fits.includes(styleOf(style).panel));
 
-/** Windows that will actually be drawn, accounting for decorative inserts (which replace the pattern with a top row). */
-export function windowsFor(cfg: Pick<DoorConfig, "pattern" | "decor">): Win[] {
-  const decor = DECORATIVE_DESIGNS.find((d) => d.id === cfg.decor);
-  if (decor && decor.size === "L") return [{ row: 0, x: 0.045, w: 0.44 }, { row: 0, x: 0.515, w: 0.44 }];
-  if (decor && decor.size === "S") return four(0);
-  return WINDOW_PATTERNS.find((p) => p.id === cfg.pattern)?.windows ?? [];
+/** Drops windows and inserts that no longer fit after the style or size changes. */
+export function sanitizeConfig(c: DoorConfig): DoorConfig {
+  const cols = columnsFor(c.style, c.width);
+  const windows = [...new Set(c.windows)].filter((k) => {
+    const [r, col] = k.split("-").map(Number);
+    return r >= 0 && r < ROWS && col >= 0 && col < cols;
+  }).sort();
+  const windowType = windowTypesFor(c.style).some((t) => t.id === c.windowType) ? c.windowType : "plain";
+  return { ...c, windows, windowType };
+}
+
+/** Reads a stored config, including records saved before windows could be placed individually. */
+export function toConfig(raw: any): DoorConfig {
+  const c: DoorConfig = {
+    ...DEFAULT_CONFIG,
+    style: DOOR_STYLES.some((s) => s.id === raw?.style) ? raw.style : DEFAULT_CONFIG.style,
+    colour: DOOR_COLOURS.some((x) => x.id === raw?.colour) ? raw.colour : DEFAULT_CONFIG.colour,
+    width: Number(raw?.width) || DEFAULT_CONFIG.width,
+    height: Number(raw?.height) || DEFAULT_CONFIG.height,
+    quantity: Number(raw?.quantity) || 1,
+    windowType: typeof raw?.windowType === "string" ? raw.windowType : "plain",
+    windows: Array.isArray(raw?.windows) ? raw.windows.map(String) : [],
+    glass: GLASS_TYPES.some((g) => g.id === raw?.glass) ? raw.glass : "clear",
+    frame: typeof raw?.frame === "string" ? raw.frame : "match",
+  };
+  return sanitizeConfig(c);
 }
 
 /** Human-readable summary used in admin, emails, and the confirmation screen. */
 export function describeConfig(cfg: DoorConfig) {
-  const style = DOOR_STYLES.find((s) => s.id === cfg.style)?.name ?? cfg.style;
+  const style = styleOf(cfg.style).name;
   const colour = DOOR_COLOURS.find((c) => c.id === cfg.colour)?.name ?? cfg.colour;
-  const decor = DECORATIVE_DESIGNS.find((d) => d.id === cfg.decor);
-  const pattern = WINDOW_PATTERNS.find((p) => p.id === cfg.pattern);
-  const hasWindows = (decor && decor.id !== "none") || (pattern && pattern.id !== "none");
-  const windows = decor && decor.id !== "none"
-    ? `Decorative top row: ${decor.code} ${decor.name}`
-    : pattern && pattern.id !== "none" ? `${pattern.code} ${pattern.name}` : "No windows";
-  const glass = hasWindows ? GLASS_TYPES.find((g) => g.id === cfg.glass)?.name ?? cfg.glass : "N/A";
-  return { style, colour, windows, glass };
+  const size = sizeLabel(cfg.width, cfg.height);
+  const n = cfg.windows.length;
+  const type = WINDOW_TYPES.find((t) => t.id === cfg.windowType);
+  const rows = [...new Set(cfg.windows.map((k) => Number(k.split("-")[0])))].sort();
+  const rowNames = ["top", "second", "third", "bottom"];
+  const windows = n === 0 ? "No windows (solid panels)"
+    : `${n} x ${type?.name ?? "window"} in the ${rows.map((r) => rowNames[r]).join(", ")} section${rows.length > 1 ? "s" : ""}`;
+  const glass = n ? GLASS_TYPES.find((g) => g.id === cfg.glass)?.name ?? cfg.glass : "N/A";
+  const frame = n ? FRAME_COLOURS.find((f) => f.id === cfg.frame)?.name ?? cfg.frame : "N/A";
+  return { style, colour, size, quantity: String(cfg.quantity), windows, glass, frame };
 }
 
 export const isValidConfig = (c: DoorConfig) =>
   DOOR_STYLES.some((s) => s.id === c.style) &&
   DOOR_COLOURS.some((x) => x.id === c.colour) &&
-  WINDOW_PATTERNS.some((p) => p.id === c.pattern) &&
+  (DOOR_WIDTHS as readonly number[]).includes(c.width) &&
+  (DOOR_HEIGHTS as readonly number[]).includes(c.height) &&
+  Number.isInteger(c.quantity) && c.quantity >= 1 && c.quantity <= MAX_QUANTITY &&
+  windowTypesFor(c.style).some((t) => t.id === c.windowType) &&
   GLASS_TYPES.some((g) => g.id === c.glass) &&
-  DECORATIVE_DESIGNS.some((d) => d.id === c.decor);
+  FRAME_COLOURS.some((f) => f.id === c.frame) &&
+  Array.isArray(c.windows) && c.windows.length <= ROWS * columnsFor(c.style, c.width) &&
+  sanitizeConfig(c).windows.length === new Set(c.windows).size;

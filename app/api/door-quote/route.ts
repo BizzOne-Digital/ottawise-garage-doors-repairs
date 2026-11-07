@@ -15,13 +15,14 @@ export function POST(req: Request) {
   return handlePublicSubmit(req, "door-quote", doorQuoteSchema, async (d) => {
     const config = d.config as DoorConfig;
     const summary = describeConfig(config);
-    const doc = await DoorQuote.create({ ...d, config, summary, service: "New Garage Door (Configurator)", status: "New" });
+    const doc = await DoorQuote.create({ ...d, config, summary, doorSize: summary.size, service: "New Garage Door (Configurator)", status: "New" });
     const emailStatus = await sendNotification({
       subject: `New garage door quote request: ${d.name}`,
       replyTo: d.email,
       rows: [
-        ["Name", d.name], ["Email", d.email], ["Phone", d.phone], ["Area", d.area], ["Door size", d.doorSize],
-        ["Door style", summary.style], ["Colour", summary.colour], ["Windows", summary.windows], ["Glass", summary.glass],
+        ["Name", d.name], ["Email", d.email], ["Phone", d.phone], ["Area", d.area],
+        ["Door style", summary.style], ["Size", summary.size], ["Quantity", summary.quantity], ["Colour", summary.colour],
+        ["Windows", summary.windows], ["Glass", summary.glass], ["Window frame", summary.frame],
         ["Message", d.message || "-"],
         ["Received", new Intl.DateTimeFormat("en-CA", { timeZone: "America/Toronto", dateStyle: "medium", timeStyle: "short" }).format(new Date()) + " (Ottawa time)"],
       ],

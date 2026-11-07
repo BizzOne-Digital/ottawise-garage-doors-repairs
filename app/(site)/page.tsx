@@ -3,7 +3,8 @@ import { ArrowRight, CalendarDays, Check, ChevronDown, MapPin, OctagonX, Phone, 
 import SafeImage from "@/components/SafeImage";
 import { AreasBand, CheckList, CtaBand, Eyebrow, ServiceCard } from "@/components/site/Blocks";
 import MapleLeaf from "@/components/site/MapleLeaf";
-import { getPage, getServices, getSettings, list, s } from "@/lib/content";
+import RecentWork from "@/components/site/RecentWork";
+import { getPage, getServices, getSettings, getTestimonials, list, s } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 600;
@@ -25,7 +26,7 @@ function splitList(items: string[]) {
 }
 
 export default async function HomePage() {
-  const [page, settings, services] = await Promise.all([getPage("home"), getSettings(), getServices()]);
+  const [page, settings, services, testimonials] = await Promise.all([getPage("home"), getSettings(), getServices(), getTestimonials()]);
   const d = page.data;
   const featured = (services.filter((x) => x.featured).length ? services.filter((x) => x.featured) : services).slice(0, 3);
   const others = services.filter((x) => !featured.some((f) => f.slug === x.slug));
@@ -181,6 +182,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <RecentWork testimonials={testimonials} />
 
       {/* New door upgrade */}
       <section aria-labelledby="upgrade-heading" className="bg-navy-deep text-white/80">

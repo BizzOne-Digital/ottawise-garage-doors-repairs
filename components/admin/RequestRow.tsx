@@ -12,7 +12,7 @@ import { STATUS_STYLES } from "./ui";
 export type ReqItem = {
   id: string; name: string; email: string; phone: string; service: string; area: string; message: string;
   status: string; adminNotes: string; createdAt: string; preferredDate?: string; timeWindow?: string;
-  doorSize?: string; emailStatus?: string; summary?: { style: string; colour: string; windows: string; glass: string }; config?: DoorConfig;
+  doorSize?: string; emailStatus?: string; summary?: { style: string; colour: string; windows: string; glass: string; size?: string; quantity?: string; frame?: string }; config?: DoorConfig;
 };
 
 const fmtDateTime = (iso: string) => new Intl.DateTimeFormat("en-CA", { timeZone: "America/Toronto", dateStyle: "medium", timeStyle: "short" }).format(new Date(iso));
@@ -79,12 +79,14 @@ export default function RequestRow({ item, kind }: { item: ReqItem; kind: "enqui
             )}
             {item.config && item.summary && (
               <div className="flex gap-3 rounded-md border border-line p-3">
-                <div className="w-32 shrink-0 rounded bg-navy-deep p-1.5"><DoorPreview config={item.config} idPrefix={`q-${item.id}`} className="h-auto w-full" /></div>
+                <div className="w-40 shrink-0 rounded bg-white p-1.5 ring-1 ring-line"><DoorPreview config={item.config} idPrefix={`q-${item.id}`} className="h-auto w-full" /></div>
                 <dl className="grid flex-1 grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-xs">
                   <dt className="font-semibold">Style</dt><dd className="text-navy">{item.summary.style}</dd>
                   <dt className="font-semibold">Colour</dt><dd className="text-navy">{item.summary.colour}</dd>
                   <dt className="font-semibold">Windows</dt><dd className="text-navy">{item.summary.windows}</dd>
                   <dt className="font-semibold">Glass</dt><dd className="text-navy">{item.summary.glass}</dd>
+                  {item.summary.frame && <><dt className="font-semibold">Frame</dt><dd className="text-navy">{item.summary.frame}</dd></>}
+                  {item.summary.quantity && <><dt className="font-semibold">Quantity</dt><dd className="text-navy">{item.summary.quantity}</dd></>}
                   {item.doorSize && <><dt className="font-semibold">Size</dt><dd className="text-navy">{item.doorSize}</dd></>}
                 </dl>
               </div>

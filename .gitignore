@@ -5,3 +5,6 @@ node_modules
 *.tsbuildinfo
 next-env.d.ts
 .env.vercel
+
+# Raw client files (full house numbers and customer names) - only processed copies in public/images are published
+public/attachment_*

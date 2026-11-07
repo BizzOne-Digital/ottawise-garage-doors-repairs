@@ -163,13 +163,20 @@ const DoorQuoteSchema = new Schema(
     config: {
       style: { type: String, required: true, maxlength: 40 },
       colour: { type: String, required: true, maxlength: 40 },
-      pattern: { type: String, required: true, maxlength: 40 },
+      width: Number,
+      height: Number,
+      quantity: Number,
+      windowType: { type: String, maxlength: 40 },
+      windows: [{ type: String, maxlength: 5 }],
       glass: { type: String, required: true, maxlength: 40 },
-      decor: { type: String, required: true, maxlength: 40 },
+      frame: { type: String, maxlength: 40 },
+      // Legacy fields from the first configurator version.
+      pattern: { type: String, maxlength: 40 },
+      decor: { type: String, maxlength: 40 },
     },
     // Human-readable snapshot, so records stay meaningful if the catalogue changes later.
     summary: {
-      style: String, colour: String, windows: String, glass: String,
+      style: String, colour: String, size: String, quantity: String, windows: String, glass: String, frame: String,
     },
     emailStatus: { type: String, enum: ["sent", "failed", "not-configured"], default: "not-configured" },
   },
