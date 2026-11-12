@@ -73,7 +73,7 @@ export const DEFAULT_SETTINGS: SiteSettingsT = {
   phoneDisplay: "(343) 209-2317",
   phoneLink: "tel:+13432092317",
   email: "ottawisegaragedoors@gmail.com",
-  websiteUrl: "https://ottawisegaragedoors.ca",
+  websiteUrl: "https://www.ottawisegaragedoors.ca",
   instagramUrl: "https://www.instagram.com/ottawise_garagedoors/",
   facebookUrl: "https://www.facebook.com/share/1FF6E6dKyC/",
   whatsappUrl: "https://wa.me/message/XMIOPHP3IJ6TN1",
